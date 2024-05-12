@@ -73,13 +73,14 @@ export type CardSpellSchools = 'arcane' | 'fire' | 'frost' | 'nature' | 'holy' |
 
 export type CardSearchOptions = {
   attack?: number | number[]
-  class?: CardClass
+  class?: CardClass | CardClass[]
   collectible?: 0 | 1
   gameMode?: CardGameMode
   health?: number | number[]
   keyword?: string
   manaCost?: number | number[]
   minionType?: CardMinionType
+  multiClass?: CardClass
   /**
    * @deprecated use sort option instead
    */
@@ -99,13 +100,14 @@ export const cardSearch = (
   args: CardSearchOptions,
 ): Resource<{
   attack?: number | string
-  class?: CardClass
+  class?: string
   collectible?: 0 | 1 | '0,1'
   gameMode?: CardGameMode
   health?: number | string
   keyword?: string
   manaCost?: number | string
   minionType?: CardMinionType
+  multiClass?: CardClass
   page?: number
   pageSize?: number
   rarity?: CardRarity
@@ -120,13 +122,14 @@ export const cardSearch = (
     path: 'hearthstone/cards',
     params: {
       attack: Array.isArray(args.attack) ? args.attack.join(',') : args.attack,
-      class: args.class,
+      class: Array.isArray(args.class) ? args.class.join(',') : args.class,
       collectible: args.collectible === undefined ? '0,1' : args.collectible,
       gameMode: args.tier === undefined ? args.gameMode : 'battlegrounds',
       health: Array.isArray(args.health) ? args.health.join(',') : args.health,
       keyword: args.keyword,
       manaCost: Array.isArray(args.manaCost) ? args.manaCost.join(',') : args.manaCost,
       minionType: args.minionType,
+      multiClass: args.multiClass,
       page: args.page,
       pageSize: args.pageSize,
       rarity: args.rarity,
