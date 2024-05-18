@@ -12,6 +12,7 @@ export type CardClass =
   | 'warlock'
   | 'warrior'
   | 'neutral'
+  | 'deathknight'
 
 export type CardGameMode = 'constructed' | 'battlegrounds' | 'arena' | 'mercenaries'
 
